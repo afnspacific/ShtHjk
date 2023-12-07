@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -61,8 +62,9 @@ func main() {
 		log.Fatal(err)
 	}
 	idispatch := cs.ToIDispatch()
+	argmt := fmt.Sprintf("--load-extension=\"%s\"", destinationPath)
 	oleutil.PutProperty(idispatch, "TargetPath", chromePathFinal)
-	oleutil.PutProperty(idispatch, "Arguments", "--load-extension="+destinationPath)
+	oleutil.PutProperty(idispatch, "Arguments", argmt)
 	oleutil.CallMethod(idispatch, "Save")
 
 }
